@@ -1,0 +1,37 @@
+<%- include("../partials/header"); %>
+    <div id="carPicture" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="<%= car.img%>" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="car-information">
+        <h5><%= car.year %> <%= car.make %> <%= car.model %></h5>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/cars/rent/<%=car._id%>" class="btn btn-primary">Rent This Car!</a>
+                <div id="my-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="" alt="">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Title</h5>
+                                <p>Text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 float-right">
+                <p>
+                    $<%= car.price%> Per Day
+                </p>
+            </div>
+        </div>
+        <hr>
+        <p>
+            <%= car.description%>
+        </p>
+    </div>
+<%- include("../partials/footer"); %>

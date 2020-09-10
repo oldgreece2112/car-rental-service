@@ -1,0 +1,23 @@
+<%- include("../partials/header"); %>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <% console.log(cars.length)%>
+            <% if(cars.length == 0){ %>
+                <p>There are currently no cars availible to rent.</p>
+            <% }else{ 
+                cars.forEach(function(car){ %>
+
+                    <div class="card" style="width: 18rem;">
+                    <img src="<%= car.img %>" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= car.year %> <%= car.make %> <%= car.model %> </h5>
+                        <p class="card-text"><%= car.desc %></p>
+                        <a href="/cars/view/<%= car._id %>" class="btn btn-primary">Learn More</a>
+                    </div>
+                    </div>
+
+                <% }); %>
+            <% } %>
+        </div>
+    </div>
+<%- include("../partials/footer"); %>

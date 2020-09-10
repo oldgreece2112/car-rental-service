@@ -1,0 +1,88 @@
+<%- include("../partials/header"); %>
+    <form action="/cars/rent/<%= car._id %>" method="post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Full Name:</label>
+              <input id="name" class="form-control" type="text" name="name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input id="email" class="form-control" type="email" name="email">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="street">Street Address:</label>
+              <input id="street" class="form-control" type="text" name="street">
+            </div>
+            <div class="form-group">
+              <label for="street2"></label>
+              <input id="street2" class="form-control" type="text" name="street2">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input id="city" class="form-control" type="text" name="city">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="state">State:</label>
+              <input id="state" class="form-control" type="text" name="state">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="postalCode">Postal Code:</label>
+              <input id="postalCode" class="form-control" type="text" name="postalCode">
+            </div>
+          </div>
+        </div>
+        <br>
+        <div id="card-element"></div>
+        <div id="card-errors"></div>
+        <br>
+        <button class="btn btn-primary" type="submit">Rent Car</button>
+    </form>
+    <script>
+        const stripe = Stripe('pk_test_51HOU6cK3JEdXbA89pWLp9xm0NDM4y9pKWc3NfBzcYgQ3taFS1I0zsEwEOc2f8XCJyR2LqppDGpEXjxAxd4jQzH4900LVqyZVSS'); // Your Publishable Key
+const elements = stripe.elements();
+
+var style = {
+  base: {
+    color: "#32325d",
+  }
+};
+
+const card = elements.create('card', { style: style });
+card.mount('#card-element');
+
+const form = document.querySelector('form');
+const errorEl = document.querySelector('#card-errors');
+
+// Give our token to our form
+const stripeTokenHandler = token => {
+  const hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  form.submit();
+}
+
+// Create token from card data
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  stripe.createToken(card).then(res => {
+    if (res.error) errorEl.textContent = res.error.message;
+    else stripeTokenHandler(res.token);
+  })
+})
+    </script>
+<%- include("../partials/footer"); %>

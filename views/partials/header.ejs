@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Service</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">Car Rental Service</a>
+        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cars/view">Cars</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about-us" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contactus" class="nav-link">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <% if (error && error.length > 0) {%>
+            <div class = "alert alert-danger" role = "alert">
+                <%= error%>
+            </div>
+        <% }  %>
+        <% if (success && success.length > 0) {%>
+        <div class = "alert alert-success" role = "alert">
+            <%= success%>
+        </div>
+        <% }  %>
+
+        <h1>Car Rental Service</h1>
+        <hr>
